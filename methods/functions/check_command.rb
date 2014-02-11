@@ -7,9 +7,7 @@ def check_ban
 end
 
 def check_command(command)
-  puts "Checking command: #{command} with values: #{p @@standard_command_array}"
     @@standard_command_array.each do |method| # For every item inside the command_array (from require function)
-      puts "Comparing command: #{command} to Method: #{method}"
       if command == method # If we get a match for a command
         if @locked == true and @full_user != @admin
           chan_send("Sorry, #{@user_name_first}, I am currently locked (Probably for maintenance)")
