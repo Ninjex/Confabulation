@@ -6,7 +6,6 @@ class Configuration
     @nick, @owner, @pass      = nick, owner, pass
     @server, @port, @channel  = server, port, channel
   end
-  require './core.rb'
 end
 #=> obj = Bot.new('nick', 'owner', 'password', 'server', 'port', 'channel')
 #=> obj.start connects (and keeps a connection) to the server with the object details

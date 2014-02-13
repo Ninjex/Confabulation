@@ -1,3 +1,4 @@
+require_relative 'constructor.rb'
 class Bot < Configuration
   def start
     @irc = TCPSocket.open(@server, @port)
