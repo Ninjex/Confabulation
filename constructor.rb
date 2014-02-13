@@ -13,7 +13,7 @@ class Hide
 end
 
 class Configuration
-  def initialize(nick, owner, pass, server, port, channel)
+  def initialize(nick, owner, server, port, channel)
     @nick, @owner, @server  = nick, owner, server
     @port, @channel         = port, channel
     @pass = Hide::password
