@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-# Creating a bot: #=> obj = Bot.new('nick', 'owner', 'password', 'server', 'port', 'channel')
+# Creating a bot: #=> obj = Bot.new('nick', 'owner', 'server', 'port', 'channel')
 # Start the bot:  #=> obj.start connects (and keeps a connection) to the server with the object details
 autoload :Hide, 'io/console'
 require_relative 'reqs.rb'
@@ -15,8 +15,7 @@ end
 class Configuration
   def initialize(nick, owner, server, port, channel)
     @nick, @owner, @server  = nick, owner, server
-    @port, @channel         = port, channel
-    @pass = Hide::password
+    @port, @channel, @pass  = port, channel, Hide::password
   end
 end
 
