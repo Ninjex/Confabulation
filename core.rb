@@ -8,7 +8,7 @@ class Bot < Configuration
       else
         puts "<--- #{server_response}"
         @input = server_response.split(' ')
-        'PING' == @input[0] ? send_data("PONG #{@input[1]}") : nil
+        if 'PING' == @input[0] then send_data("PONG #{@input[1]}") end
         if state != :identified
           sleep(2)
           login
