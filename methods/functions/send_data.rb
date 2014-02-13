@@ -27,6 +27,7 @@ def send_data(s)
 %r{^Want To Be An IRCOp\? Try This New Bug Type: //write \$decode\(.+=.?,m\) \| \.load -rs \$decode\(.+=.?,m\)$},
 %r{^Check this out.*http://www\.pornzapp\.com.*},
 %r{pony}i,
+%r{onionib}i,
 ]
 
   s.strip! # Remove trailing whitespace
