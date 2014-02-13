@@ -1,12 +1,49 @@
 #!/usr/bin/ruby
-require 'socket' # In the future: require one file, that has all dependancy requires inside of it
-require './methods/load_methods.rb'
-class Configuration
-  def initialize(nick, owner, pass, server, port, channel)
-    @nick, @owner, @pass      = nick, owner, pass
-    @server, @port, @channel  = server, port, channel
+# Creating a bot: #=> obj = Bot.new('nick', 'owner', 'password', 'server', 'port', 'channel')
+# Start the bot:  #=> obj.start connects (and keeps a connection) to the server with the object details
+autoload :Hide, 'io/console'
+require_relative 'reqs.rb'
+require_relative 'methods/load_methods.rb'
+
+class Hide
+  def self.password
+    print 'Bot Password: '
+    STDIN.noecho(&:gets).chomp; puts
   end
 end
-#=> obj = Bot.new('nick', 'owner', 'password', 'server', 'port', 'channel')
-#=> obj.start connects (and keeps a connection) to the server with the object details
-# Create your bots inside /bots I will add a feature later to help construct bots / choose from a list, etc
+
+class Configuration
+  def initialize(nick, owner, pass, server, port, channel)
+    @nick, @owner, @server  = nick, owner, server
+    @port, @channel         = port, channel
+    @pass = Hide::password
+  end
+end
+
+class Bot < Configuration
+  def start
+    @irc = TCPSocket.open(@server, @port)
+    state, running = :not_identified, true
+    while running
+      server_response = @irc.gets
+      if server_response.empty? or nil? then sleep(0.5)
+      else
+        puts "<--- #{server_response}"
+        @input = server_response.split(' ')
+        if 'PING' == @input[0] then send_data("PONG #{@input[1]}") end
+        if state != :identified
+          sleep(2)
+          login
+          state = :identified
+        end
+        command = @input[3]
+        @chan   = @input[2]
+        check_command(command)  # This method will be added via require and will iterate the methods directory and validate commands
+        if @input[1] == '376' # 376 - Integer value that determines the end of the MOTD
+          sleep(2)
+          send_data("JOIN #{@channel}")
+        end
+      end
+    end
+  end
+end
