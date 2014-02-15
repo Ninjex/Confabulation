@@ -7,16 +7,16 @@ Feel free to contribute methods, design changes, etc!
 
 Getting started:
 
-  1. Create a new file that will contain your bot, for an example I will call it ```bot.rb```
+  1. Create a new file that will contain your bot, for an example I will call it ```bot.rb```<br>
 Require the constructor from the main file: ```require_relative 'constructor.rb'```
 
 
-  2. Create an object from the bot class with the server and some basic information
-Syntax: ```# object = Bot.new('Nick', 'Owner', 'server', port, '#channel')```
+  2. Create an object from the bot class with the server and some basic information<br>
+Syntax:  ```# object = Bot.new('Nick', 'Owner', 'server', port, '#channel')```<br>
 Example: ```bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667', '#defocus')```
 
 
-  3. Next we can choose to add a moderator list to our bot using the mods method from inside ```Class Bot```
+  3. Next we can choose to add a moderator list to our bot using the mods method from inside ```Class Bot```<br>
 This will allow the specified users to access the methods within ```methods/access/mod/```<br>
 Define the moderators as an array in the following format:<br>
 ```bob.mods(['Tim', 'Roger', 'Sherral', 'Jane', 'Jackie'])```<br>
