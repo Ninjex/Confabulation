@@ -31,7 +31,6 @@ class Bot < Configuration
     @irc = TCPSocket.open(@server, @port)
     state, running = :not_identified, true
     @identified_users = Array.new
-    #@mods = [@owner, 'mShred', 'limdis', 'law', 'Shawn'] # Place all moderators here (keep @owner)
     while running
       server_response = @irc.gets
       if server_response.empty? or nil? then sleep(0.5)
