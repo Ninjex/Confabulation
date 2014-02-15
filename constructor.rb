@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 # Creating a bot: #=> obj = Bot.new('nick', 'owner', 'server', 'port', 'channel')
 # Start the bot:  #=> obj.start connects (and keeps a connection) to the server with the object details
+# Add moderators: #=> obj.mods(['username', 'username', 'etc']) -- @owner will automatically be pushed to mods
 autoload :Hide, 'io/console'
 require_relative 'reqs.rb'
 require_relative 'methods/load_methods.rb'
@@ -20,9 +21,17 @@ class Configuration
 end
 
 class Bot < Configuration
+
+  def mods(array)
+    @mods = [@owner]
+    array.map{|moderator| @mods.push(moderator)}
+  end
+
   def start
     @irc = TCPSocket.open(@server, @port)
     state, running = :not_identified, true
+    @identified_users = Array.new
+    #@mods = [@owner, 'mShred', 'limdis', 'law', 'Shawn'] # Place all moderators here (keep @owner)
     while running
       server_response = @irc.gets
       if server_response.empty? or nil? then sleep(0.5)
@@ -35,9 +44,13 @@ class Bot < Configuration
           login
           state = :identified
         end
+        user_array # Push the current user variables
         command = @input[3]
         @chan   = @input[2]
+
         check_command(command)  # This method will be added via require and will iterate the methods directory and validate commands
+        @auth = :not_authenticated # Flush authorization after each method, so that no one can impersonate a previously authed user for ops
+        
         if @input[1] == '376' # 376 - Integer value that determines the end of the MOTD
           sleep(2)
           send_data("JOIN #{@channel}")
