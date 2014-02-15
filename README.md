@@ -1,8 +1,9 @@
 Confabulation
 =============
 
-Confabultion is an IRC bot framework written in Ruby.
-The goal is to make it simple, easy to use, and easy to add on to
+Confabultion is an IRC bot framework written in Ruby.<br>
+The goal is to make it simple to use, maintain, and add onto.<br>
+Feel free to contribute methods, design changes, etc!
 
 Getting started:
 
