@@ -6,7 +6,7 @@ The goal is to make it simple, easy to use, and easy to add on to
 
 Getting started:
 
-Create a new file that will contain your bot, for an example I will call it ```bot.rb```
+1. Create a new file that will contain your bot, for an example I will call it ```bot.rb```
 
 
 require the constructor from the main file: ```require_relative 'constructor.rb'```
@@ -31,6 +31,13 @@ This will grant Tim, Roger, Sherral, Jane, and Jackie moderator access
 
 Run the bot: ```bob.start```
 
+Our bot file should now look similar to the following:
+```
+require_relative 'constructor.rb'
+bob = Bot.new('Bob', 'Ninjex', 'hub.irc.hackthissite.org', 6667, '#metasploit')
+bob.mods(['mShred', 'limdis', 'law', 'wall', 'Shawn']) # Make sure you use an array for moderators
+bob.start
+```
 Simply put:
 
 Things to do / define  | variable
