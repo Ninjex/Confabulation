@@ -9,17 +9,17 @@ Getting started:
 1. Create a new file that will contain your bot, for an example I will call it ```bot.rb```
 
 
-require the constructor from the main file: ```require_relative 'constructor.rb'```
+Require the constructor from the main file: ```require_relative 'constructor.rb'```
 
 
-Create an object from the bot class with the server and some basic information
+2. Create an object from the bot class with the server and some basic information
 
 Syntax: ```# object = Bot.new('Nick', 'Owner', 'server', port, '#channel')```
 
 Example: ```bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667', '#defocus')```
 
 
-Next we can choose to add a moderator list to our bot using the mods method from inside ```Class Bot```
+3. Next we can choose to add a moderator list to our bot using the mods method from inside ```Class Bot```
 
 This will allow the specified users to access the methods within ```methods/access/mod/```
 
@@ -29,7 +29,7 @@ Define the moderators as an array in the following format:
 
 This will grant Tim, Roger, Sherral, Jane, and Jackie moderator access
 
-Run the bot: ```bob.start```
+4. Run the bot: ```bob.start```
 
 Our bot file should now look similar to the following:
 ```
