@@ -1,5 +1,5 @@
 def check_mod
   @mods.each do |mod|
-    if mod == @user_name_first then return true end
+    if mod.downcase == @user_name_first.downcase then return true end
   end
 end
