@@ -1,5 +1,4 @@
 def check_mod
-  @mods.each do |mod|
-    if mod.downcase == @user_name_first.downcase then return true end
-  end
+  @mods.map{|mod| mod.downcase!}
+  @mods.include?(@user_name_first.downcase)
 end
