@@ -41,18 +41,22 @@ def send_data(s)
       puts "ALERT >> [Bad Phrase]: #{s} [From]: #{@user_name_first}" # Send alert to the terminal
       s = "\x034ALERT [Bad Phrase] >> TYPE [GLINE] >>\x03\x033 FROM [#{@user_name_first}]\x03" # Change the text of the string
       
-      if @channel.downcase == @nick.downcase # If the channel is a pm with the bot
+      if @chan.downcase == @nick.downcase # If the channel is a pm with the bot
         @irc.puts("PRIVMSG #{@user_name_first} :> #{s}") # Send the text to the user interacting with the bot in pm
       else
-        @irc.puts("PRIVMSG #{@channel} :> #{s}") # Else, we send the text to the channel name instead
+        @irc.puts("PRIVMSG #{@chan} :> #{s}") # Else, we send the text to the channel name instead
       end
     end
   end
 
-  if detected == 0 and s.length <= 275 # If the text length is under 450 characters
+  if detected == 0 and s.length <= 350 # If the text length is under 450 characters
     @irc.puts s # Push it through through the socket
     puts "==> #{s}" # Push it to the terminal (stdout)
+  elsif detected != 0
+    @irc.puts "PRIVMSG #{@chan} :#{s}"
+    @irc.puts "PRIVMSG #{@owner} :#{s}"
   else
-    @irc.puts "PRIVMSG #{@channel} :\x034> ALERT [SPAM] >> LENGTH [#{s.length}] >>\x03\x033 FROM [#{@user_name_first}]\x03"
+    @irc.puts "PRIVMSG #{@chan} :\x034> ALERT [SPAM] >> LENGTH [#{s.length}] >>\x03\x033 FROM [#{@user_name_first}]\x03"
+    @irc.puts "PRIVMSG #{@owner} :\x034> ALERT [SPAM] >> LENGTH [#{s.length}] >>\x03\x033 FROM [#{@user_name_first}]\x03"
   end
 end 

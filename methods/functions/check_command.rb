@@ -13,9 +13,8 @@ def check_command(command)
   unless @user_name_first.include?(':') or @user_name_first.include?('.') or restrict.include?(@user_name_first)
     if @@mod_commands.include?(command) or @@admin_commands.include?(command) or @@standard_commands.include?(command)
       if @lock == :locked and @user_name_first.downcase != @owner
-        chan_send("Sorry, #{@user_name_first}, I am currently locked (Probably for maintenance)")
+        chan_send("Sorry #{@user_name_first}, I am currently locked (Probably for maintenance). Only #{@owner} may initiate commands at this time.")        
       else
-
         # ITERATE OVER MOD COMMANDS AND AUTH #
         if @@mod_commands.include?(command)
           check_auth(@user_name_first)
@@ -26,18 +25,22 @@ def check_command(command)
                 send(command)
               end
             end
+          else
+            chan_send("You are not authorized for this command!")
           end
 
         # ITERATE OVER ADMIN COMMANDS AND AUTH #
         elsif @@admin_commands.include?(command)
           check_auth(@user_name_first)
-          if @user_name_first == @owner and @auth == :authenticated
+          if @user_name_first.downcase == @owner.downcase and @auth == :authenticated
             @@admin_commands.each do |method|
               if command == method
                 command.gsub!(/[:.\/]/,'')
                 send(command)
               end
             end
+          else
+            chan_send("You are not authorized for this command!")
           end
 
         # ITERATE OVER STANDARD COMMANDS #

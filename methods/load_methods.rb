@@ -10,9 +10,9 @@ def parse_access(path)
   Dir["#{METHODS}#{ACCESS}#{path}*.rb"].each do |file|
     require file
     func = file.gsub("#{METHODS}#{ACCESS}#{path}", "")[0..-4]
-    if path == "standard/" then @@standard_commands.push(":./" + func) end
-    if path == "mod/" then @@mod_commands.push(":./" + func) end
-    if path == "admin/" then @@admin_commands.push(":./" + func) end
+    if path == "standard/" then @@standard_commands << ":./#{func}" end
+    if path == "mod/" then @@mod_commands << ":./#{func}" end
+    if path == "admin/" then @@admin_commands << ":./#{func}" end
   end
 end
 Dir["./methods/functions/*.rb"].each do |file|

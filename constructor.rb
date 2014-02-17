@@ -24,13 +24,12 @@ class Bot < Configuration
 
   def mods(array)
     @mods = [@owner]
-    array.map{|moderator| @mods.push(moderator)}
+    array.map{|mod| @mods << mod}
   end
 
   def start
     @irc = TCPSocket.open(@server, @port)
     state, running = :not_identified, true
-    @identified_users = Array.new
     while running
       server_response = @irc.gets
       if server_response.empty? or nil? then sleep(0.5)
@@ -55,6 +54,6 @@ class Bot < Configuration
           send_data("JOIN #{@channel}")
         end
       end
-    end
-  end
+    end # end while
+  end # end method
 end
