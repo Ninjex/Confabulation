@@ -25,7 +25,7 @@ In addition, if you would like to join multiple channels at load, define them as
   3. Next we can choose to add a moderator list to our bot using the mods method from inside ```Class Bot```<br>
 This will allow the specified users to access the methods within ```methods/access/mod/```<br>
 Define the moderators as an separated comma string in the following format:<br>
-```bob.mods(['Tim, Roger, Sherral, Jane, Jackie')```<br>
+```bob.mods('Tim, Roger, Sherral, Jane, Jackie')```<br>
 This will grant Tim, Roger, Sherral, Jane, and Jackie moderator access
 
   4. Run the bot: ```bob.start```<br>
