@@ -45,7 +45,7 @@ Things to do / Define  | How to define / do it
 Require Constructor    | require_relative 'constructor.rb'
 Create a Bot object    | bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667, '#defocus')
 Multi Chans (optional) | channels = '#coffeesh0p, #metasploit, #bots'
-Moderators (optional)  | bob.mods('john', 'doe', 'bill')
+Moderators (optional)  | bob.mods('john, doe, bill')
 Start the bot          | bob.start
 
 If you want to add a new 'command' (something the bot will respond to), create a new file with the same name as the method name. Place the file in the correct ```/methods/access/``` folder to restrict it to your likings.<br>
