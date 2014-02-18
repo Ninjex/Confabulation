@@ -55,7 +55,6 @@ class Bot < Configuration
 
         if @input[1] == '376' # 376 - Integer value that determines the end of the MOTD
           @channel.split(',').map{|chan| send_data("JOIN #{chan}")}
-          #send_data("JOIN #{@channel}")
         end
       end
     end # end while
