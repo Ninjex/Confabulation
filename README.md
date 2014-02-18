@@ -13,7 +13,11 @@ Require the constructor from the main file: ```require_relative 'constructor.rb'
 
   2. Create an object from the bot class with the server and some basic information<br>
 Syntax:  ```# object = Bot.new('Nick', 'Owner', 'server', port, '#channel')```<br>
-Example: ```bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667', '#defocus')```
+Example: ```bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667', '#defocus')```<br>
+In addition, if you would like to join multiple channels at load, define them as a string separated by commas and pass it to the object where the channels would be.<br>
+Example:<br>
+```channels = '#coffeesh0p, #metasploit, #bots'
+bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667, channels)``` 
 
 
   3. Next we can choose to add a moderator list to our bot using the mods method from inside ```Class Bot```<br>
@@ -34,10 +38,11 @@ bob.start
 ```
 Simply put:
 
-Things to do / define  | variable
+Things to do / Define  | How to define / do it
 ---------------------- | ----------------------------------------------------------------------
-Require constructor    | require_relative 'constructor.rb'
-create a Bot object    | bob = bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667, '#defocus')
+Require Constructor    | require_relative 'constructor.rb'
+Create a Bot object    | bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667, '#defocus')
+Multi Chans (optional) | channels = '#coffeesh0p, #metasploit, #bots'
 Moderators (optional)  | bob.mods(['john', 'doe', 'bill'])
 Start the bot          | bob.start
 
