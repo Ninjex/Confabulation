@@ -48,9 +48,13 @@ class Bot < Configuration
 
         check_command(command)  # This method will be added via require and will iterate the methods directory and validate commands
         @auth = :not_authenticated # Flush authorization after each method, so that no one can impersonate a previously authed user for ops
-        
+
+        if @alert == :on and get_message.downcase.include?(@owner.downcase)
+          alert
+        end
+
         if @input[1] == '376' # 376 - Integer value that determines the end of the MOTD
-          sleep(2)
+          sleep 2
           send_data("JOIN #{@channel}")
         end
       end
