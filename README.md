@@ -15,9 +15,11 @@ Require the constructor from the main file: ```require_relative 'constructor.rb'
 Syntax:  ```# object = Bot.new('Nick', 'Owner', 'server', port, '#channel')```<br>
 Example: ```bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667', '#defocus')```<br>
 In addition, if you would like to join multiple channels at load, define them as a string separated by commas and pass it to the object where the channels would be.<br>
-Example:<br>
-```channels = '#coffeesh0p, #metasploit, #bots'
-bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667, channels)``` 
+  Example:<br>
+  ```
+  channels = '#coffeesh0p, #metasploit, #bots'
+  bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667, channels)
+  ``` 
 
 
   3. Next we can choose to add a moderator list to our bot using the mods method from inside ```Class Bot```<br>
