@@ -22,9 +22,9 @@ end
 
 class Bot < Configuration
 
-  def mods(array)
+  def mods(mod_string)
     @mods = [@owner]
-    array.map{|mod| @mods << mod}
+    mod_string.split(',').map{|mod| @mods << mod.strip.downcase}
   end
 
   def start
@@ -54,7 +54,7 @@ class Bot < Configuration
         end
 
         if @input[1] == '376' # 376 - Integer value that determines the end of the MOTD
-          @channel.split(',').map{|chan| send_data("JOIN #{chan}")}
+          @channel.split(',').map{|chan| send_data("JOIN #{chan.strip}")}
         end
       end
     end # end while
