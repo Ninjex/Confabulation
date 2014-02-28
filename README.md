@@ -25,7 +25,7 @@ In addition, if you would like to join multiple channels at load, define them as
   3. Next we can choose to add a moderator list to our bot using the mods method from inside ```Class Bot```<br>
 This will allow the specified users to access the methods within ```methods/access/mod/```<br>
 Define the moderators as an separated comma string in the following format:<br>
-```bob.mods(['Tim, Roger, Sherral, Jane, Jackie')```<br>
+```bob.mods('Tim, Roger, Sherral, Jane, Jackie')```<br>
 This will grant Tim, Roger, Sherral, Jane, and Jackie moderator access
 
   4. Run the bot: ```bob.start```<br>
@@ -45,7 +45,7 @@ Things to do / Define  | How to define / do it
 Require Constructor    | require_relative 'constructor.rb'
 Create a Bot object    | bob = Bot.new('Bob', 'Ninjex', 'chat.freenode.net', 6667, '#defocus')
 Multi Chans (optional) | channels = '#coffeesh0p, #metasploit, #bots'
-Moderators (optional)  | bob.mods('john', 'doe', 'bill')
+Moderators (optional)  | bob.mods('john, doe, bill')
 Start the bot          | bob.start
 
 If you want to add a new 'command' (something the bot will respond to), create a new file with the same name as the method name. Place the file in the correct ```/methods/access/``` folder to restrict it to your likings.<br>
