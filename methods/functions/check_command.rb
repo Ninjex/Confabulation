@@ -11,15 +11,15 @@ def check_command(command)
 
   # Don't attempt to check the command if it's the server, nickserv, PING, etc
   unless @user_name_first.include?(':') or @user_name_first.include?('.') or restrict.include?(@user_name_first)
-    if @@mod_commands.include?(command) or @@admin_commands.include?(command) or @@standard_commands.include?(command)
+    if MODERATOR.include?(command) or ADMINISTRATOR.include?(command) or STANDARD.include?(command)
       if @lock == :locked and @user_name_first.downcase != @owner.downcase
         chan_send("Sorry #{@user_name_first}, I am currently locked (Probably for maintenance). Only #{@owner} may initiate commands at this time.")        
       else
         # ITERATE OVER MOD COMMANDS AND AUTH #
-        if @@mod_commands.include?(command)
+        if MODERATOR.include?(command)
           check_auth(@user_name_first)
           if check_mod == true and @auth == :authenticated
-            @@mod_commands.each do |method|
+            MODERATOR.each do |method|
               if command == method
                 command.gsub!(/[:.\/]/,'')
                 send(command)
@@ -30,10 +30,10 @@ def check_command(command)
           end
 
         # ITERATE OVER ADMIN COMMANDS AND AUTH #
-        elsif @@admin_commands.include?(command)
+        elsif ADMINISTRATOR.include?(command)
           check_auth(@user_name_first)
           if @user_name_first.downcase == @owner.downcase and @auth == :authenticated
-            @@admin_commands.each do |method|
+            ADMINISTRATOR.each do |method|
               if command == method
                 command.gsub!(/[:.\/]/,'')
                 send(command)
@@ -44,8 +44,8 @@ def check_command(command)
           end
 
         # ITERATE OVER STANDARD COMMANDS #
-        elsif @@standard_commands.include?(command)
-          @@standard_commands.each do |method|
+        elsif STANDARD.include?(command)
+          STANDARD.each do |method|
             if command == method
               command.gsub!(/[:.\/]/,'')
               send(command)

@@ -8,3 +8,5 @@ channels = '#bleble' # Join multiple channels, now an option
 bob = Bot.new('Bob', 'Ninjex', 'hub.irc.hackthissite.org', 6667, channels)
 bob.mods('mShred, limdis, law, wall, Shawn') # Create a list of moderators
 bob.start
+
+### FIX ./nick FUNCTION ###

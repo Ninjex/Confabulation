@@ -1,6 +1,6 @@
-@@standard_commands = [] # Create an array for regular user commands
-@@mod_commands      = [] # Create an array for moderator commands
-@@admin_commands    = [] # Create an array for administrator commands
+STANDARD        = [] # Create an array for regular user commands
+MODERATOR       = [] # Create an array for moderator commands
+ADMINISTRATOR   = [] # Create an array for administrator commands
 
 METHODS   = './methods'
 ACCESS    = '/access/'
@@ -10,9 +10,9 @@ def parse_access(path)
   Dir["#{METHODS}#{ACCESS}#{path}*.rb"].each do |file|
     require file
     func = file.gsub("#{METHODS}#{ACCESS}#{path}", "")[0..-4]
-    if path == "standard/" then @@standard_commands << ":./#{func}" end
-    if path == "mod/" then @@mod_commands << ":./#{func}" end
-    if path == "admin/" then @@admin_commands << ":./#{func}" end
+    if path == "standard/" then STANDARD << ":./#{func}" end
+    if path == "mod/" then MODERATOR << ":./#{func}" end
+    if path == "admin/" then ADMINISTRATOR << ":./#{func}" end
   end
 end
 Dir["./methods/functions/*.rb"].each do |file|

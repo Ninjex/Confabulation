@@ -34,14 +34,16 @@ class Bot < Configuration
       server_response = @irc.gets
       if server_response.empty? or nil? then sleep(0.5)
       else
-        puts "<--- #{server_response}"
+        puts "<-- #{server_response}"
         @input = server_response.split(' ')
-        if 'PING' == @input[0] then send_data("PONG #{@input[1]}") end
+        send_data("PONG #{@input[1]}") if @input[0] == 'PING'
+
         if state != :identified
           sleep(2)
           login
           state = :identified
         end
+
         user_array # Push the current user variables
         command = @input[3]
         @chan   = @input[2]
@@ -49,13 +51,12 @@ class Bot < Configuration
         check_command(command)  # This method will be added via require and will iterate the methods directory and validate commands
         @auth = :not_authenticated # Flush authorization after each method, so that no one can impersonate a previously authed user for ops
 
-        if @alert == :on and get_message.downcase.include?(@owner.downcase)
-          alert
-        end
+        alert if @alert == :on and @input.drop(2).join(' ').downcase.include?(@owner.downcase)
 
         if @input[1] == '376' # 376 - Integer value that determines the end of the MOTD
           @channel.split(',').map{|chan| send_data("JOIN #{chan.strip}")}
         end
+
       end
     end # end while
   end # end method
