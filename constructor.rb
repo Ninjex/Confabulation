@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 # Creating a bot: #=> obj = Bot.new('nick', 'owner', 'server', 'port', 'channel')
 # Start the bot:  #=> obj.start connects (and keeps a connection) to the server with the object details
-# Add moderators: #=> obj.mods(['username', 'username', 'etc']) -- @owner will automatically be pushed to mods
+# Add moderators: #=> obj.mods(['bob, joe, sally, john, etc') -- @owner will automatically be pushed to mods
 autoload :Hide, 'io/console'
 require_relative 'reqs.rb'
 require_relative 'methods/load_methods.rb'
