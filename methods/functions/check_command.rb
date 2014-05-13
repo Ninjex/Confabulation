@@ -12,7 +12,7 @@ def check_command(command)
   # Don't attempt to check the command if it's the server, nickserv, PING, etc
   unless @user_name_first.include?(':') or @user_name_first.include?('.') or restrict.include?(@user_name_first)
     if MODERATOR.include?(command) or ADMINISTRATOR.include?(command) or STANDARD.include?(command)
-      if @lock == :locked and @user_name_first.downcase != @owner.downcase
+      if @lock == :locked && (@user_name_first.downcase != @owner.downcase || MODERATOR.include?(@user_name_first.downcase) == false)
         chan_send("Sorry #{@user_name_first}, I am currently locked (Probably for maintenance). Only #{@owner} may initiate commands at this time.")        
       else
         # ITERATE OVER MOD COMMANDS AND AUTH #
@@ -22,6 +22,7 @@ def check_command(command)
             MODERATOR.each do |method|
               if command == method
                 command.gsub!(/[:.\/]/,'')
+                load FILE_PATHS[command] if FILE_PATHS.include?(command) ### DOES IT WORK?
                 send(command)
               end
             end
@@ -36,6 +37,7 @@ def check_command(command)
             ADMINISTRATOR.each do |method|
               if command == method
                 command.gsub!(/[:.\/]/,'')
+                load FILE_PATHS[command] if FILE_PATHS.include?(command) ### DOES IT WORK?
                 send(command)
               end
             end
@@ -48,6 +50,7 @@ def check_command(command)
           STANDARD.each do |method|
             if command == method
               command.gsub!(/[:.\/]/,'')
+              load FILE_PATHS[command] if FILE_PATHS.include?(command) ### DOES IT WORK?
               send(command)
             end
           end
